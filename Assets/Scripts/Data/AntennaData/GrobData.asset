@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d7d7462642e21804d85c916d2a7c5004, type: 3}
+  m_Name: GrobData
+  m_EditorClassIdentifier: Assembly-CSharp::AntennaData
+  antennaName: Grob
+  fraungoferDistance: 0
+  frequencyGHz: 2.4
+  maxdB: 0
+  mindB: 0
+  maxMHz: 0
+  minMHz: 0
+  diagram2DDatafile: {fileID: 4900000, guid: cef35acbb65c1b14a9f6ddf54a8e73ba, type: 3}
+  diagram2DImage: {fileID: 2800000, guid: aa5c5d49527002c43aa02b44ae179c81, type: 3}
+  antennaModel: {fileID: 3443429575455346709, guid: f65d27cab4f57ac4c981da086c291262, type: 3}
+  signalLevelValues: []

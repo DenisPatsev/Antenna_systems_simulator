@@ -1,0 +1,141 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 8
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: ReflectionMaterial
+  m_Shader: {fileID: 4800000, guid: 4e7eef30dcf50c6458c234d494ee604d, type: 3}
+  m_Parent: {fileID: 0}
+  m_ModifiedSerializedProperties: 0
+  m_ValidKeywords: []
+  m_InvalidKeywords: []
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_LockedProperties: 
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _BumpMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DetailAlbedoMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DetailMask:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DetailNormalMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DistortionMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _EmissionMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MainTex:
+        m_Texture: {fileID: 2800000, guid: 8515b28f5b96e804ab7bfeed3b94d197, type: 3}
+        m_Scale: {x: 1, y: -1}
+        m_Offset: {x: 0, y: 1}
+    - _MetallicGlossMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _OcclusionMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _ParallaxMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _ReflectionMask:
+        m_Texture: {fileID: 2800000, guid: 69dfe1422271a7c4c82e1e78383c9057, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _ReflectionTex:
+        m_Texture: {fileID: 8400000, guid: 717e829977b7ff34d9c849eaaee4ec82, type: 2}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _RenderCube:
+        m_Texture: {fileID: 8400000, guid: 717e829977b7ff34d9c849eaaee4ec82, type: 2}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _RenderTex:
+        m_Texture: {fileID: 8400000, guid: 717e829977b7ff34d9c849eaaee4ec82, type: 2}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Ints: []
+    m_Floats:
+    - _Alpha: 0.783
+    - _AlphaMultiplier: 0.909
+    - _Aspect: 1
+    - _AspectRatio: 1
+    - _BumpScale: 1
+    - _Cutoff: 0
+    - _DetailNormalMapScale: 1
+    - _DistortionCorrection: 0
+    - _DistortionMaskInfluence: 1.39
+    - _DistortionStrength: 0.02
+    - _DstBlend: 0
+    - _Exposure: 0.26
+    - _FOV: 150
+    - _FresnelPower: 4.07
+    - _GlossMapScale: 1
+    - _Glossiness: 0.366
+    - _GlossyReflections: 1
+    - _Metallic: 0
+    - _Mode: 0
+    - _OcclusionStrength: 1
+    - _Parallax: 0.02
+    - _ReflectionAlpha: 0.252
+    - _ReflectionAmount: 1
+    - _ReflectionAreaSize: 10
+    - _ReflectionBlend: 1.04
+    - _ReflectionBlur: 0.0264
+    - _ReflectionDistortion: 0.165
+    - _ReflectionMaskAddition: 0.5
+    - _ReflectionMaskRotation: -30
+    - _ReflectionPlaneY: 1.7
+    - _ReflectionPower: 0.95
+    - _ReflectionStrength: 0.704
+    - _Smoothness: 1
+    - _SmoothnessTextureChannel: 0
+    - _SpecularHighlights: 1
+    - _SrcBlend: 1
+    - _Transparency: 0.828
+    - _UVSec: 0
+    - _ZWrite: 1
+    m_Colors:
+    - _CameraForward: {r: 1, g: 1, b: 1, a: 1}
+    - _CameraPos: {r: 0, g: 0, b: 0, a: 1}
+    - _CameraRight: {r: -90, g: 0, b: 0, a: 0}
+    - _CameraUp: {r: 0, g: 0, b: 0, a: 0}
+    - _Color: {r: 1, g: 1, b: 1, a: 1}
+    - _DistortionOffset: {r: 0, g: 2.91, b: 2.38, a: 0}
+    - _DistortionScroll: {r: 4.11, g: 0.37, b: 0, a: 0}
+    - _DistortionTiling: {r: 1, g: 1, b: 0, a: 0}
+    - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
+    - _ReflectionCameraPos: {r: -1.96, g: 0.3, b: 0.1, a: 0}
+    - _ReflectionMaskOffset: {r: 0, g: 0, b: 0, a: 0}
+    - _ReflectionMaskPivot: {r: 0.5, g: 0.5, b: 0, a: 0}
+    - _ReflectionMaskTiling: {r: 1, g: 1, b: 0, a: 0}
+    - _ReflectionOffset: {r: -1.05, g: -2.75, b: 1, a: -2.67}
+    - _ReflectionTiling: {r: 0.27, g: 0.23, b: 1.27, a: 0}
+    - _Tiling: {r: 1, g: -1, b: 0, a: 1}
+  m_BuildTextureStacks: []
+  m_AllowLocking: 1

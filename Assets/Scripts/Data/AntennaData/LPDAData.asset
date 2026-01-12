@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d7d7462642e21804d85c916d2a7c5004, type: 3}
+  m_Name: LPDAData
+  m_EditorClassIdentifier: Assembly-CSharp::AntennaData
+  antennaName: LPDA
+  fraungoferDistance: 0
+  frequencyGHz: 1.4
+  maxdB: 0
+  mindB: 0
+  maxMHz: 0
+  minMHz: 0
+  diagram2DDatafile: {fileID: 4900000, guid: 4e19d7e1c35d6ec4396a61d91fb464e2, type: 3}
+  diagram2DImage: {fileID: 2800000, guid: 44c28c9d7f85e364eb67b5929ac25cf6, type: 3}
+  antennaModel: {fileID: 2359483539311054618, guid: b87664b5aac0ede4ea2b7ca289d3c5f4, type: 3}
+  signalLevelValues: []

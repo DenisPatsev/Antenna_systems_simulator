@@ -1,0 +1,731 @@
+﻿@startuml
+class AntennaDemoController {
+    - _rotationSpeed : float
+    - _cameraMoveSpeed : float
+    - _antenna : GameObject
+    - _camera : Camera
+    - _rotX : float
+    - _rotY : float
+    - Update() : void
+}
+class AntennaPatternUI {
+    + dataFile : TextAsset
+    + lineMaterial : Material
+    - lineRenderer : LineRenderer
+    + ReloadData() : void
+    + SetScale(newScale : float) : void
+    + SetDataFile(newDataFile : TextAsset) : void
+    + HasData() : bool
+    + GetDataInfo() : string
+}
+class AntennaPatternVisualizer {
+    + dataFile : TextAsset
+    + lineMaterial : Material
+    - lineRenderer : LineRenderer
+    + ReloadData() : void
+    + SetScale(newScale : float) : void
+    + SetReferenceGain(newReferenceGain : float) : void
+    + SetDataFile(newDataFile : TextAsset) : void
+}
+class AttentionBlockerController {
+    + _acceptionButton : InteractableUIButton
+    + _blocker : GameObject
+    + OnAccepted : UnityAction
+    - OnEnable() : void
+    - Accept() : void
+}
+class CameraFocusableObject {
+    + cameraFocusPositionPoint : Transform
+    + OnFocusStart : UnityAction
+    + OnFocusEnd : UnityAction
+    - _playerInteractor : PlayerInteractor
+    + FocusOn() : void
+    - Update() : void
+    + FocusOff() : void
+    + InitializeInteractor(interactor : PlayerInteractor) : void
+}
+class CameraFocusController {
+    + camera : Camera
+    + playerInteractor : PlayerInteractor
+    + playerController : PlayerController
+    - _cameraFocusableObject : CameraFocusableObject
+    - OnEnable() : void
+    - InitializeFocusableObject(focusableObject : CameraFocusableObject) : void
+    - MoveCameraToObject() : void
+    - SetDefaultCameraPosition() : void
+    - Unsubscribe() : void
+    - OnDisable() : void
+}
+class CursorStateChanger {
+}
+class DataParserStatic {
+}
+class DataShower {
+    - textAsset : TextAsset
+    - Start() : void
+}
+class DiagramBuilder {
+    + meshMaterial : Material
+    - meshFilter : MeshFilter
+    - meshRenderer : MeshRenderer
+    - mesh : Mesh
+    - parsedPoints : List<FarfieldPoint>
+    - _labels : List<MeshRenderer>
+    + phi : float
+    + theta : float
+    + reTheta : float
+    + imTheta : float
+    + rePhi : float
+    + imPhi : float
+    - Update() : void
+    + LoadDataAndGenerateMesh() : void
+    + GenerateMeshFromCurrentSelection() : void
+    + ToggleShowAllAngles() : void
+    + ToggleAxes() : void
+    - InitializeComponents() : void
+    - ParseFarfieldFile(filePath : string) : void
+    - CreateMeshFromAllAngles() : void
+    - CreateMeshFromSingleAngle(points : List<FarfieldPoint>, phiAngle : float) : void
+    - CreateAxes() : void
+    - CreateAxis(name : string, direction : Vector3, color : Color) : GameObject
+    - CreateAxisLabels() : void
+    - CreateTextLabel(name : string, text : string, position : Vector3, color : Color) : void
+    - DestroyAxes() : void
+    - FindMaxMagnitude(points : List<FarfieldPoint>) : float
+    - SphericalToCartesian(theta : float, phi : float) : Vector3
+    - CalculateFieldMagnitude(point : FarfieldPoint) : float
+    - CalculateColor(magnitude : float, maxMagnitude : float) : Color
+}
+class FarfieldPoint {
+    + meshMaterial : Material
+    - meshFilter : MeshFilter
+    - meshRenderer : MeshRenderer
+    - mesh : Mesh
+    - parsedPoints : List<FarfieldPoint>
+    - _labels : List<MeshRenderer>
+    + phi : float
+    + theta : float
+    + reTheta : float
+    + imTheta : float
+    + rePhi : float
+    + imPhi : float
+    - Update() : void
+    + LoadDataAndGenerateMesh() : void
+    + GenerateMeshFromCurrentSelection() : void
+    + ToggleShowAllAngles() : void
+    + ToggleAxes() : void
+    - InitializeComponents() : void
+    - ParseFarfieldFile(filePath : string) : void
+    - CreateMeshFromAllAngles() : void
+    - CreateMeshFromSingleAngle(points : List<FarfieldPoint>, phiAngle : float) : void
+    - CreateAxes() : void
+    - CreateAxis(name : string, direction : Vector3, color : Color) : GameObject
+    - CreateAxisLabels() : void
+    - CreateTextLabel(name : string, text : string, position : Vector3, color : Color) : void
+    - DestroyAxes() : void
+    - FindMaxMagnitude(points : List<FarfieldPoint>) : float
+    - SphericalToCartesian(theta : float, phi : float) : Vector3
+    - CalculateFieldMagnitude(point : FarfieldPoint) : float
+    - CalculateColor(magnitude : float, maxMagnitude : float) : Color
+}
+class DiagramRotator {
+    - _rotationSpeed : Vector3
+    - Update() : void
+}
+class DiagramViewController {
+    - _rotationSpeed : float
+    - _zoomSpeed : float
+    - _maxZoom : float
+    - _minZoom : float
+    - _camera : Camera
+    - _diagramBuilder : DiagramBuilder
+    - _zOffset : float
+    - OnEnable() : void
+    - Update() : void
+    - CalculateCameraTransform() : void
+}
+class DiagramViewState {
+    - _root : VisualElement
+    - _uiEventsService : UIEventsService
+    - _sceneLoader : SceneLoader
+    - _stateMachine : StateMachine
+    - _diagramBuilder : DiagramBuilder
+    - _exitButton : Button
+    - _showAllButton : Button
+    - _degrees : Label
+    - _arrowContainer : VisualElement
+    - _isAllAngles : bool
+    + Enter() : void
+    + Subscribe() : void
+    - CreateDiagram() : void
+    - OnExitButtonClicked() : void
+    - OnShowAllButtonClicked() : void
+    - OnLoadScene() : void
+    + Unsubscribe() : void
+    + Exit() : void
+}
+class DontDestroyOnLoadObject {
+    - Awake() : void
+}
+class ICameraFocusable <<interface>> {
+}
+class InfoCanvas {
+    - _objectInfoText : TMP_Text
+    - _hintText : TMP_Text
+    - _player : GameObject
+    - Update() : void
+    + DisplayInfo(info : string, position : Vector3) : void
+    + HideInfo() : void
+    + InitializePlayer(player : GameObject) : void
+}
+class LampGlowMeshGenerator {
+    + glowMaterial : Material
+    - glowMeshObject : GameObject
+    - mesh : Mesh
+    - vertices : Vector3[]
+    - triangles : int[]
+    - uv : Vector2[]
+    - OnDrawGizmos() : void
+    + GenerateGlowMesh() : void
+    + DestroyGlowMesh() : void
+    - CreateDefaultMaterial() : Material
+    + SetGlowLength(newLength : float) : void
+    + SetStartSize(width : float, height : float) : void
+    + SetEndSize(width : float, height : float) : void
+    + SetCornerRoundness(roundness : float) : void
+    + SetCornerRadius(radius : float) : void
+    + SetQuality(widthSegs : int, lengthSegs : int, heightSegs : int) : void
+    + SetMaterial(newMaterial : Material) : void
+}
+class PlayerController {
+    - _moveSpeed : float
+    - _rotaionSpeed : float
+    - _player : GameObject
+    - _camera : Camera
+    - _yRotation : float
+    - _xRotation : float
+    - OnEnable() : void
+    - OnDisable() : void
+    - Update() : void
+    - LoadTransform() : void
+    - SaveTransform() : void
+}
+class PlayerInteractor {
+    - _interactableObject : InteractableObject
+    - _cameraFocusableObject : CameraFocusableObject
+    - OnTriggerEnter(other : Collider) : void
+    - Update() : void
+    - OnTriggerExit(other : Collider) : void
+}
+class PlayerSessionData {
+}
+class SignalLevelMover {
+    - _sliders : List<Slider>
+    - _mainSlider : Slider
+    - _changingSpeed : float
+    - _maxdB : TMP_Text
+    - _mindB : TMP_Text
+    - _minMHz : TMP_Text
+    - _maxMHz : TMP_Text
+    - _randomValue : float
+    - _waitForSeconds : WaitForSeconds
+    - _coroutine : Coroutine
+    - _maxMainSliderValue : float
+    - _minMainSliderValue : float
+    - OnEnable() : void
+    - OnDisable() : void
+    - LevelRandomCoroutine() : IEnumerator
+    + Initialize(maxMHz : float, minMHz : float, maxdB : float, mindB : float) : void
+    + SetMainSliderValue(value : float) : void
+}
+class SimpleReflection {
+    + reflectionCamera : Camera
+    + renderTexture : RenderTexture
+    + rotationOffset : Vector3
+    - _mainCamera : Camera
+    - _resolution : Vector2
+    - OnEnable() : void
+    - OnValidate() : void
+    - LateUpdate() : void
+    - InitMainCamera() : void
+    - ChangeResolution() : void
+}
+class TrenogaWheel {
+}
+class Zalupa {
+}
+class Constants {
+}
+class GameBootstrapper {
+    - _uiEventsService : UIEventsService
+    - _progressStageStateMachine : ProgressStageStateMachine
+    - _antennaDatas : AntennaData[]
+    - _sceneLoader : SceneLoader
+    - _stateMachine : StateMachine
+    - _enablingCoroutine : Coroutine
+    - _selectedAntenna : AntennaData
+    - Awake() : void
+    + SetCurrentAntennaData(antennaName : string) : void
+    + EnableStateMachineDelayed(delay : float, progressStage : ProgressStageStateMachine) : void
+    + AddStageData(stageName : string, stageObject : IStageObject) : void
+    - DelayedObjectsEnabler(delay : float, progressStage : ProgressStageStateMachine) : IEnumerator
+}
+class GameFactory {
+}
+class GameViewController {
+    - _mainCamera : Camera
+    - _computerCamera : Camera
+    + EnableComputerView() : void
+    + EnableLaboratoryView() : void
+}
+class IGameFactory <<interface>> {
+}
+class IObjectCreator <<interface>> {
+}
+class SceneLoader {
+    - _coroutineRunner : ICoroutineRunner
+    + LoadScene(sceneName : string, onLoaded : UnityAction) : void
+    - Load(sceneName : string, onLoaded : UnityAction) : IEnumerator
+}
+class UIEventsService {
+    - _diagramViewScreen : UIDocument
+    - _MainMenuScreen : UIDocument
+    - _gameLoopScreen : UIDocument
+    - _playerController : PlayerController
+    - _blocker : GameObject
+    - _playerInteractor : PlayerInteractor
+    - _infoCanvas : InfoCanvas
+    - _fraungoferDistanceCanvas : Canvas
+    - _computer : Computer
+    - OnDisable() : void
+    + InitializeComputer(computer : Computer) : void
+    + InitializeBlocker(blocker : GameObject) : void
+    + InitializePlayerController(playerController : PlayerController) : void
+    + InitializeFraungoferDistanceCanvas(canvas : Canvas) : void
+    + InitializeMainSceneObjects(interactor : PlayerInteractor, infoCanvas : InfoCanvas) : void
+}
+class AntennaRotator {
+    - _rightTurnButton : InteractableUIButton
+    - _leftTurnButton : InteractableUIButton
+    - _degreesText : TMP_Text
+    - _dBLevelText : TMP_Text
+    - _rotationstep : float
+    - _currentRotationZ : float
+    - _trenogaWheel : GameObject
+    - OnEnable() : void
+    - OnDisable() : void
+    - OnRightButtonClick() : void
+    - OnLeftButtonClick() : void
+    - RotateAntenna(direction : int) : void
+    - UpdateInfo() : void
+    - LoadRotation() : void
+    - SaveRotation() : void
+    + InitializeWheel(wheel : GameObject) : void
+    + ShowSignalLevel(level : float) : void
+}
+class Computer {
+    # _image : RawImage
+    - _canInteract : bool
+    # OnEnable() : void
+    + ShowDiagram(texture : Texture2D) : void
+    + Initialize(eventsService : UIEventsService) : void
+    + SetInteractableState() : void
+}
+class Door {
+}
+class Generator {
+    + LoadingPanel : GameObject
+    + MainInfoPanel : GameObject
+    + InactivePanel : GameObject
+    + ErrorMessage : TMP_Text
+    + ApplyButton : Button
+    + InputField : TMP_InputField
+    + LoadingDuration : float
+    + ErrorMessageDuration : float
+    - _isEnabled : bool
+    - _starterCoroutine : Coroutine
+    - _errorCoroutine : Coroutine
+    - _targetFrequency : float
+    - _defaultInfo : string
+    - _errorInfo : string
+    - _defaultColor : Color
+    - _errorColor : Color
+    - OnEnable() : void
+    - OnDisable() : void
+    - TryApplyFrequency() : void
+    - Activate() : void
+    - Starter() : IEnumerator
+    - ShowErrorMessage() : void
+    - ErrorShower() : IEnumerator
+    + SetTargetFrequency(frequency : float) : void
+}
+class InteractableObject <<abstract>> {
+    # _name : string
+    # _meshRenderers : MeshRenderer[]
+    # _outlineMaterial : Material
+    # _infoInterfacePosition : Vector3
+    # _focusableObject : CameraFocusableObject
+    # _uiEventsService : UIEventsService
+    - _defaultMaterials : Material[]
+    # OnEnable() : void
+    # OnDisable() : void
+    + SetOutline() : void
+    + SetDefaultMaterial() : void
+    - OnDrawGizmos() : void
+}
+class InteractableUIButton {
+    + focusedColor : Color
+    + normalColor : Color
+    + button : Button
+    - _playerInteractor : PlayerInteractor
+    - OnTriggerEnter(other : Collider) : void
+    - Update() : void
+    - OnTriggerExit(other : Collider) : void
+}
+class InteractableUIInputField {
+    + inputField : TMP_InputField
+    - _playerInteractor : PlayerInteractor
+    - OnTriggerEnter(other : Collider) : void
+    - Update() : void
+    - OnTriggerExit(other : Collider) : void
+}
+class Tripod {
+}
+class VectorAnalyzer {
+    - _inactivePanel : GameObject
+    - _mainInfo : GameObject
+    - _loadingPanel : GameObject
+    - _loadingDuration : float
+    - _signalLevelMover : SignalLevelMover
+    - _isEnabled : bool
+    - _loadingCoroutine : Coroutine
+    + OnActivate : UnityAction
+    - OnEnable() : void
+    - Activate() : void
+    - Starter() : IEnumerator
+    + EnableMeasurementMode(maxMHz : float, minMHz : float, maxdB : float, mindB : float) : void
+}
+class ICoroutineRunner <<interface>> {
+}
+class IExitableState <<interface>> {
+}
+class IState <<interface>> {
+}
+class IPayloadState <<interface>> {
+}
+class IInteractableObject <<interface>> {
+}
+class IProgressStage <<interface>> {
+}
+class IStageObject <<interface>> {
+}
+class LightSettings {
+    - _laboratoryLights : Light[]
+    - _bezechCameraLights : Light[]
+    - _fakeLightMaterial : Material
+    - _laboratoryLightColor : Color
+    - _bezechCameraLightColor : Color
+    - _fakeLightColor : Color
+    + laboratoryLightIntensity : float
+    + bezechCameraLightIntensity : float
+    - Start() : void
+    - ApplySettings() : void
+    - OnValidate() : void
+}
+class GameLoopState {
+    - _sceneLoader : SceneLoader
+    - _uiEventsService : UIEventsService
+    - _computer : Computer
+    - _gameBootstrapper : GameBootstrapper
+    - _stateMachine : StateMachine
+    - _playerInteractor : PlayerInteractor
+    - _infoCanvas : InfoCanvas
+    - _blocker : GameObject
+    - _diagramBuilder : DiagramBuilder
+    + Enter() : void
+    + Subscribe() : void
+    + Unsubscribe() : void
+    - CreateGameWorld() : void
+    - CreatePlayer() : void
+    - CreateInfoCanvas() : void
+    - CreateComputer() : void
+    - CreateVectorAnalyzer() : void
+    - CreateFraungoferDistanceCanvas() : void
+    - CreateMeasurableAntenna() : void
+    - CreateGenerator() : void
+    - CreateBlocker() : void
+    - OnComputerInteraction() : void
+    + Exit() : void
+}
+class InitialState {
+    - _gameBootstrapper : GameBootstrapper
+    - _stateMachine : StateMachine
+    + Enter() : void
+    - OnLoaded() : void
+    + Subscribe() : void
+    + Unsubscribe() : void
+    + Exit() : void
+}
+class MainMenuState {
+    - _uiEventsService : UIEventsService
+    - _gameBootstrapper : GameBootstrapper
+    - _stateMachine : StateMachine
+    - _root : VisualElement
+    - _choiceScreen : VisualElement
+    - _mainMenuScreen : VisualElement
+    - _measurementModeButton : Button
+    - _settingsButton : Button
+    - _dictionaryButton : Button
+    - _exitButton : Button
+    - _leftSwitchButton : Button
+    - _rightSwitchButton : Button
+    - _toMeasurementButton : Button
+    - _antennaNameLabel : Label
+    - _currentAntennaIndex : int
+    + Enter() : void
+    + Exit() : void
+    - OnMeasurementModeButtonClicked() : void
+    - OnSettingsButtonClicked() : void
+    - OnDictionaryButtonClicked() : void
+    - OnExitButtonClicked() : void
+    - OnLeftSwitchButtonClicked() : void
+    - OnRightSwitchButtonClicked() : void
+    - OnApplyButtonClicked() : void
+    - UpdateAntennaInfo() : void
+    - OnLoaded() : void
+    + Subscribe() : void
+    + Unsubscribe() : void
+}
+class StateMachine {
+    - _activeState : IExitableState
+}
+class AntennaData {
+    + antennaName : string
+    + fraungoferDistance : float
+    + frequencyMGz : float
+    + maxdB : float
+    + mindB : float
+    + maxMHz : float
+    + minMHz : float
+    + diagram2DDatafile : TextAsset
+    + diagram2DImage : Texture2D
+}
+class StageObjectsData {
+    + StageName : string
+    + GetStageObjectByType(type : Type) : IStageObject
+}
+class PlayerData {
+}
+class AttentionStage {
+    - _attentionBlockerController : AttentionBlockerController
+    + OnStageStarted : UnityAction { get; set; }
+    + OnStageFinished : UnityAction { get; set; }
+    + StartStage() : void
+    + EndStage() : void
+}
+class DiagramsDemoStage {
+    - _progressStageStateMachine : ProgressStageStateMachine
+    - _stageData : StageObjectsData
+    - _computer : Computer
+    - _gameBootstrapper : GameBootstrapper
+    + OnStageStarted : UnityAction { get; set; }
+    + OnStageFinished : UnityAction { get; set; }
+    + StartStage() : void
+    + EndStage() : void
+}
+class FraungoferDistanceMeasurementStage {
+    - _uiEventsService : UIEventsService
+    - _distanceInputField : TextField
+    - _lambdaInputField : TextField
+    - _fraungoferScreen : VisualElement
+    - _root : VisualElement
+    - _resultLabel : Label
+    - _resultButton : Button
+    + OnStageStarted : UnityAction { get; set; }
+    + OnStageFinished : UnityAction { get; set; }
+    + StartStage() : void
+    - Subscribe() : void
+    - Unsubscribe() : void
+    - OnResultButtonClicked() : void
+    + EndStage() : void
+}
+class FrequencySetupStage {
+    - _progressStageStateMachine : ProgressStageStateMachine
+    - _gameBootstrapper : GameBootstrapper
+    - _stageData : StageObjectsData
+    - _generator : Generator
+    + OnStageStarted : UnityAction { get; set; }
+    + OnStageFinished : UnityAction { get; set; }
+    + StartStage() : void
+    + EndStage() : void
+}
+class GeneratorEnablingStage {
+    - _progressStageStateMachine : ProgressStageStateMachine
+    - _stageData : StageObjectsData
+    - _generator : Generator
+    + OnStageStarted : UnityAction { get; set; }
+    + OnStageFinished : UnityAction { get; set; }
+    + StartStage() : void
+    + EndStage() : void
+}
+class MeasurementStage {
+    - _progressStageStateMachine : ProgressStageStateMachine
+    - _stageData : StageObjectsData
+    - _rotator : AntennaRotator
+    - _analyzer : VectorAnalyzer
+    - _bootstrapper : GameBootstrapper
+    + OnStageStarted : UnityAction { get; set; }
+    + OnStageFinished : UnityAction { get; set; }
+    - UpdateSignalInfo() : void
+    + StartStage() : void
+    + EndStage() : void
+}
+class ProgressStageStateMachine {
+    - _uiEventsService : UIEventsService
+    - _gameBootstrapper : GameBootstrapper
+    - _stageObjectsData : StageObjectsData[]
+    - _progressStages : IProgressStage[]
+    - _currentStageIndex : int
+    - OnEnable() : void
+    - SwitchToNextStage() : void
+    + GetDataByName(dataName : string) : StageObjectsData
+    - Subscribe() : void
+    - Unsubscribe() : void
+}
+class VectorAnalyzerEnablingStage {
+    - _stateMachine : ProgressStageStateMachine
+    - _currentStage : StageObjectsData
+    - _analyzer : VectorAnalyzer
+    + OnStageStarted : UnityAction { get; set; }
+    + OnStageFinished : UnityAction { get; set; }
+    + StartStage() : void
+    + EndStage() : void
+}
+MonoBehaviour <|-- AntennaDemoController
+MonoBehaviour <|-- AntennaPatternUI
+MonoBehaviour <|-- AntennaPatternVisualizer
+MonoBehaviour <|-- AttentionBlockerController
+MonoBehaviour <|-- CameraFocusableObject
+ICameraFocusable <|.. CameraFocusableObject
+MonoBehaviour <|-- CameraFocusController
+MonoBehaviour <|-- DataShower
+MonoBehaviour <|-- DiagramBuilder
+MonoBehaviour <|-- DiagramRotator
+MonoBehaviour <|-- DiagramViewController
+IState <|-- DiagramViewState
+MonoBehaviour <|-- DontDestroyOnLoadObject
+MonoBehaviour <|-- InfoCanvas
+MonoBehaviour <|-- LampGlowMeshGenerator
+MonoBehaviour <|-- PlayerController
+MonoBehaviour <|-- PlayerInteractor
+MonoBehaviour <|-- SignalLevelMover
+MonoBehaviour <|-- SimpleReflection
+MonoBehaviour <|-- TrenogaWheel
+MonoBehaviour <|-- GameBootstrapper
+ICoroutineRunner <|.. GameBootstrapper
+MonoBehaviour <|-- GameFactory
+MonoBehaviour <|-- GameViewController
+MonoBehaviour <|-- UIEventsService
+MonoBehaviour <|-- AntennaRotator
+IStageObject <|.. AntennaRotator
+InteractableObject <|-- Computer
+InteractableObject <|-- Door
+InteractableObject <|-- Generator
+MonoBehaviour <|-- InteractableObject
+IInteractableObject <|.. InteractableObject
+MonoBehaviour <|-- InteractableUIButton
+MonoBehaviour <|-- InteractableUIInputField
+InteractableObject <|-- Tripod
+InteractableObject <|-- VectorAnalyzer
+IExitableState <|.. IState
+IStageObject <|.. IInteractableObject
+MonoBehaviour <|-- LightSettings
+IState <|-- GameLoopState
+IState <|-- InitialState
+IState <|-- MainMenuState
+ScriptableObject <|-- AntennaData
+ScriptableObject <|-- StageObjectsData
+IProgressStage <|-- AttentionStage
+IProgressStage <|-- DiagramsDemoStage
+IProgressStage <|-- FraungoferDistanceMeasurementStage
+IProgressStage <|-- FrequencySetupStage
+IProgressStage <|-- GeneratorEnablingStage
+IProgressStage <|-- MeasurementStage
+MonoBehaviour <|-- ProgressStageStateMachine
+IProgressStage <|-- VectorAnalyzerEnablingStage
+AttentionBlockerController --> InteractableUIButton : field
+CameraFocusableObject --> PlayerInteractor : field
+CameraFocusableObject --> PlayerInteractor : parameter
+CameraFocusController --> PlayerInteractor : field
+CameraFocusController --> PlayerController : field
+CameraFocusController --> CameraFocusableObject : field
+CameraFocusController --> CameraFocusableObject : parameter
+DiagramBuilder --> FarfieldPoint : parameter
+DiagramViewController --> DiagramBuilder : field
+DiagramViewState --> UIEventsService : field
+DiagramViewState --> SceneLoader : field
+DiagramViewState --> StateMachine : field
+DiagramViewState --> DiagramBuilder : field
+PlayerInteractor --> InteractableObject : field
+PlayerInteractor --> CameraFocusableObject : field
+GameBootstrapper --> UIEventsService : field
+GameBootstrapper --> ProgressStageStateMachine : field
+GameBootstrapper --> SceneLoader : field
+GameBootstrapper --> StateMachine : field
+GameBootstrapper --> AntennaData : field
+GameBootstrapper --> ProgressStageStateMachine : parameter
+GameBootstrapper --> IStageObject : parameter
+SceneLoader --> ICoroutineRunner : field
+UIEventsService --> PlayerController : field
+UIEventsService --> PlayerInteractor : field
+UIEventsService --> InfoCanvas : field
+UIEventsService --> Computer : field
+UIEventsService --> Computer : parameter
+UIEventsService --> PlayerController : parameter
+UIEventsService --> PlayerInteractor : parameter
+UIEventsService --> InfoCanvas : parameter
+AntennaRotator --> InteractableUIButton : field
+Computer --> UIEventsService : parameter
+InteractableObject --> CameraFocusableObject : field
+InteractableObject --> UIEventsService : field
+InteractableUIButton --> PlayerInteractor : field
+InteractableUIInputField --> PlayerInteractor : field
+VectorAnalyzer --> SignalLevelMover : field
+GameLoopState --> SceneLoader : field
+GameLoopState --> UIEventsService : field
+GameLoopState --> Computer : field
+GameLoopState --> GameBootstrapper : field
+GameLoopState --> StateMachine : field
+GameLoopState --> PlayerInteractor : field
+GameLoopState --> InfoCanvas : field
+GameLoopState --> DiagramBuilder : field
+InitialState --> GameBootstrapper : field
+InitialState --> StateMachine : field
+MainMenuState --> UIEventsService : field
+MainMenuState --> GameBootstrapper : field
+MainMenuState --> StateMachine : field
+StateMachine --> IExitableState : field
+AttentionStage --> AttentionBlockerController : field
+DiagramsDemoStage --> ProgressStageStateMachine : field
+DiagramsDemoStage --> StageObjectsData : field
+DiagramsDemoStage --> Computer : field
+DiagramsDemoStage --> GameBootstrapper : field
+FraungoferDistanceMeasurementStage --> UIEventsService : field
+FrequencySetupStage --> ProgressStageStateMachine : field
+FrequencySetupStage --> GameBootstrapper : field
+FrequencySetupStage --> StageObjectsData : field
+FrequencySetupStage --> Generator : field
+GeneratorEnablingStage --> ProgressStageStateMachine : field
+GeneratorEnablingStage --> StageObjectsData : field
+GeneratorEnablingStage --> Generator : field
+MeasurementStage --> ProgressStageStateMachine : field
+MeasurementStage --> StageObjectsData : field
+MeasurementStage --> AntennaRotator : field
+MeasurementStage --> VectorAnalyzer : field
+MeasurementStage --> GameBootstrapper : field
+ProgressStageStateMachine --> UIEventsService : field
+ProgressStageStateMachine --> GameBootstrapper : field
+VectorAnalyzerEnablingStage --> ProgressStageStateMachine : field
+VectorAnalyzerEnablingStage --> StageObjectsData : field
+VectorAnalyzerEnablingStage --> VectorAnalyzer : field
+@enduml

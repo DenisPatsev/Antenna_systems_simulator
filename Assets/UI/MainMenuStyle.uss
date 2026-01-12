@@ -1,0 +1,67 @@
+.main-menu-button {
+    align-items: center;
+    justify-content: center;
+    align-self: center;
+    width: 75%;
+    height: 150px;
+    margin-top: 0;
+    margin-right: 0;
+    margin-bottom: 0;
+    margin-left: 0;
+    padding-top: 0;
+    padding-right: 0;
+    padding-bottom: 0;
+    padding-left: 0;
+    background-color: rgb(95, 112, 115);
+    border-top-width: 2px;
+    border-right-width: 2px;
+    border-bottom-width: 2px;
+    border-left-width: 2px;
+    border-left-color: rgba(149, 149, 149, 0);
+    border-right-color: rgba(149, 149, 149, 0);
+    border-top-color: rgba(149, 149, 149, 0);
+    border-bottom-color: rgba(149, 149, 149, 0);
+    background-color: transparent;
+    background-image: url("project://database/Assets/SlimUI/Modern%20Menu%201/Graphics/Buttons/Button%20Fram%20256px.png?fileID=21300000&guid=a8292d7c3170a7348accf3d85c0e7359&type=3#Button Fram 256px");
+    -unity-background-image-tint-color: rgb(254, 199, 41);
+}
+
+.main-menu-button:hover {
+    scale: 1.05 1.05;
+    background-color: transparent;
+    background-image: url("project://database/Assets/SlimUI/Modern%20Menu%201/Graphics/Buttons/Button%20Highlighted%20256px.png?fileID=21300000&guid=9e2ea1cb70ae8cf41a3db001d7b7cebb&type=3#Button Highlighted 256px");
+    -unity-background-image-tint-color: rgb(254, 199, 41);
+}
+
+.common-button {
+}
+
+.common-button:hover {
+    scale: 1.05 1.05;
+}
+
+.common-button:active {
+    scale: 0.99 0.99;
+}
+
+.settings-toggle > .unity-toggle__input > .unity-toggle__checkmark {
+    width: 62px;
+    height: 58px;
+    align-self: flex-start;
+    background-color: rgb(52, 52, 52);
+    background-image: none;
+    border-radius: 50px;
+    border-color: black;
+}
+
+.settings-toggle > .unity-toggle__input:checked > .unity-toggle__checkmark {
+    width: 62px;
+    height: 58px;
+    align-self: flex-end;
+    background-color: rgb(41, 203, 254);
+    background-image: none;
+    border-width: 1px;
+    border-radius: 50px;
+    border-color: transparent;
+    margin-left: 64px;
+}
