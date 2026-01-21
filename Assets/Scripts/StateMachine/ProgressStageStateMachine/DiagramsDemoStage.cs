@@ -40,9 +40,9 @@ public class DiagramsDemoStage : IProgressStage
         _stageObjectsData = _gameBootstrapper.ProgressStageStateMachine.GetDataByName(Constants.DiagramViewStageID);
        
         _hint.text = _stageObjectsData.Hint;
-        _hintAnimationCoroutine = _uiEventsService.StartCoroutine(UIElementsAnimationService.ShuffleTextCoroutine(_hint, _stageObjectsData.Hint, 750f));
+        _hintAnimationCoroutine = _uiEventsService.StartCoroutine(UIElementsAnimationService.ShuffleTextCoroutine(_hint, _stageObjectsData.Hint, Constants.HintAnimationSpeed));
         // _uiEventsService.StartCoroutine(UIElementsAnimationService.PingPongScale(_hintPlace, 1.15f, 0.3f, 3));
-        _uiEventsService.Pointer.SetTargetObject(_computer.transform);
+        // _uiEventsService.Pointer.SetTargetObject(_computer.transform);
     }
     
     private void Subscribe()

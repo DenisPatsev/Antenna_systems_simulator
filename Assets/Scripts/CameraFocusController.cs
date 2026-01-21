@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class CameraFocusController : MonoBehaviour
 {
@@ -8,17 +9,20 @@ public class CameraFocusController : MonoBehaviour
     public PlayerController playerController;
 
     private CameraFocusableObject _cameraFocusableObject;
+    private InteractableObject _interactableObject;
 
     private void OnEnable()
     {
         playerInteractor.OnFocus += InitializeFocusableObject;
     }
 
-    private void InitializeFocusableObject(CameraFocusableObject focusableObject)
+    private void InitializeFocusableObject(InteractableObject interactableObject)
     {
         Unsubscribe();
 
-        _cameraFocusableObject = focusableObject;
+        _cameraFocusableObject = interactableObject.FocusableObject;
+        
+        _interactableObject = interactableObject;
 
         _cameraFocusableObject.OnFocusStart += MoveCameraToObject;
         _cameraFocusableObject.OnFocusEnd += SetDefaultCameraPosition;
@@ -37,6 +41,10 @@ public class CameraFocusController : MonoBehaviour
     {
         camera.transform.localPosition = Constants.CameraDefaultPosition;
         playerController.enabled = true;
+        
+        _interactableObject.UIEventsService.GameLoopScreen.rootVisualElement.style.display = DisplayStyle.Flex;
+        _interactableObject.UIEventsService.InitializeGuide(null, null, null, null);
+        // _interactableObject.UIEventsService.SetHint("<color=white>Tab</color> - справочные материалы");
         // Cursor.visible = false;
     }
 

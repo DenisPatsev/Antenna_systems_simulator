@@ -15,7 +15,7 @@ public class ProgressStageStateMachine : MonoBehaviour
     {
         _progressStages = new IProgressStage[7];
 
-        _progressStages[0] = new FraungoferDistanceMeasurementStage(_uiEventsService);
+        _progressStages[0] = new FraungoferDistanceMeasurementStage(_uiEventsService, _gameBootstrapper);
         _progressStages[1] = new AttentionStage(_gameBootstrapper.UIEventsService, _gameBootstrapper);
         _progressStages[2] = new GeneratorEnablingStage(this, _gameBootstrapper);
         _progressStages[3] = new VectorAnalyzerEnablingStage(this, _gameBootstrapper);
@@ -26,6 +26,19 @@ public class ProgressStageStateMachine : MonoBehaviour
         _currentStageIndex = 0;
         Subscribe();
         _progressStages[_currentStageIndex].StartStage();
+    }
+
+    private void OnDisable()
+    {
+        Unsubscribe();
+
+        if (_currentStageIndex < _progressStages.Length)
+            _progressStages[_currentStageIndex].EndStage();
+
+        foreach (StageObjectsData data in _stageObjectsData)
+            data.stageObjects.Clear();
+
+        _progressStages = null;
     }
 
     private void SwitchToNextStage()
@@ -66,6 +79,7 @@ public class ProgressStageStateMachine : MonoBehaviour
 
     private void Unsubscribe()
     {
-        _progressStages[_currentStageIndex].OnStageFinished -= SwitchToNextStage;
+        if (_currentStageIndex < _progressStages.Length)
+            _progressStages[_currentStageIndex].OnStageFinished -= SwitchToNextStage;
     }
 }

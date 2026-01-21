@@ -31,6 +31,7 @@ public class GameLoopState : IState
         _uiEventsService.InitializeComputer(_computer);
         _uiEventsService.InitializeMainSceneObjects(_playerInteractor, _infoCanvas);
         _computer = _uiEventsService.Computer;
+        _uiEventsService.InitializeGuide(_gameBootstrapper.SelectedAntenna.antennaName, _gameBootstrapper.SelectedAntenna.frequencyGHz.ToString(), _gameBootstrapper.SelectedAntenna.aperture.ToString(), _gameBootstrapper.SelectedAntenna.wavelength.ToString());
         _gameBootstrapper.EnableStateMachineDelayed(2f, _gameBootstrapper.ProgressStageStateMachine);
         
         CursorStateChanger.DisableCursor();
@@ -41,6 +42,7 @@ public class GameLoopState : IState
     public void Subscribe()
     {
         _computer.OnInteract += OnComputerInteraction;
+        
     }
 
     public void Unsubscribe()
@@ -59,6 +61,8 @@ public class GameLoopState : IState
         CreateGenerator();
         CreateVectorAnalyzer();
         CreateMeasurableAntenna();
+        
+        _uiEventsService.InitializeDoor();
     }
 
     private void CreatePlayer()
@@ -68,6 +72,7 @@ public class GameLoopState : IState
         _playerInteractor = player.GetComponentInChildren<PlayerInteractor>();
         PlayerController playerController = player.GetComponentInChildren<PlayerController>();
         _uiEventsService.InitializePlayerController(playerController);
+        playerController.SetRotationSpeedMultiplier(Constants.MouseSensitivity);
         
         Camera playerCamera = player.GetComponentInChildren<Camera>();
         PostProcessLayer ppLayer = playerCamera.GetComponent<PostProcessLayer>();
@@ -115,6 +120,8 @@ public class GameLoopState : IState
     {
         GameObject distanceCanvas = GameFactory.CreateObject(Constants.FraungoferDistanceCanvasPath, Constants.FraungoferDistanceCanvasPosition, Quaternion.Euler(Constants.FraungoferDistanceCanvasRotation));
         Canvas canvas = distanceCanvas.GetComponentInChildren<Canvas>();
+        FraungoferDistancePresenter presenter = canvas.gameObject.GetComponent<FraungoferDistancePresenter>();
+        presenter.SetDistance(_gameBootstrapper.SelectedAntenna.fraungoferDistance.ToString());
         _uiEventsService.InitializeFraungoferDistanceCanvas(canvas);
         _uiEventsService.FraungoferDistanceCanvas.gameObject.SetActive(false);
     }
@@ -123,6 +130,10 @@ public class GameLoopState : IState
     {
         GameObject antennaPrefab = GameFactory.CreateObject(Constants.MeasurableAntennaPath, Constants.MeasurableAntennaPosition, Quaternion.Euler(Constants.MeasurableAntennaRotation));
         TrenogaWheel wheel = antennaPrefab.GetComponentInChildren<TrenogaWheel>();
+        GameObject antenna = GameFactory.Instantiate(_gameBootstrapper.SelectedAntenna.antennaModel, antennaPrefab.transform);
+        antenna.transform.parent = wheel.transform;
+        antenna.transform.localPosition = _gameBootstrapper.SelectedAntenna.antennaModelPosition; 
+        antenna.transform.localRotation = Quaternion.Euler(_gameBootstrapper.SelectedAntenna.antennaModelRotation);
         
         GameObject rotator = GameFactory.CreateObject(Constants.AntennaRotatorPath, Constants.AntennaRotatorPosition, Quaternion.Euler(Constants.AntennaRotatorRotation));
         AntennaRotator rotatorScript = rotator.GetComponent<AntennaRotator>();
@@ -130,8 +141,11 @@ public class GameLoopState : IState
         rotatorScript.gameObject.SetActive(false);
         
         DiagramBuilder diagramBuilder = antennaPrefab.GetComponentInChildren<DiagramBuilder>();
-        diagramBuilder.gameObject.SetActive(false);
         _diagramBuilder = diagramBuilder;
+        _diagramBuilder.InitializeData(_gameBootstrapper.SelectedAntenna.diagram3DDatafile, _gameBootstrapper.SelectedAntenna.diagram3DScale);
+        _diagramBuilder.transform.localEulerAngles = _gameBootstrapper.SelectedAntenna.diagram3DRotation;
+        _diagramBuilder.transform.localPosition += _gameBootstrapper.SelectedAntenna.diagram3DPosition;
+        diagramBuilder.gameObject.SetActive(false);
         
         _gameBootstrapper.AddStageData(Constants.MeasurementStageID, rotatorScript);
     }

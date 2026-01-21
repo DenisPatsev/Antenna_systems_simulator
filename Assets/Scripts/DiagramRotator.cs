@@ -2,10 +2,13 @@ using UnityEngine;
 
 public class DiagramRotator : MonoBehaviour
 {
-    [SerializeField] private Vector3 _rotationSpeed;
+    [SerializeField] private float _rotationSpeed;
 
+    private float _currentRotationY;
+    
     private void Update()
     {
-        transform.localRotation *= Quaternion.Euler(_rotationSpeed * Time.deltaTime);
+        _currentRotationY += Time.deltaTime * _rotationSpeed;
+        transform.eulerAngles = new Vector3(transform.eulerAngles.x, _currentRotationY, transform.eulerAngles.z);
     }
 }

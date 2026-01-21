@@ -51,7 +51,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _moveSpeed: 5
-  _rotaionSpeed: 240
+  _rotaionSpeed: 190
   _characterController: {fileID: 2244383385614051243}
   _player: {fileID: 563644867732300172}
   _camera: {fileID: 407277534663713174}

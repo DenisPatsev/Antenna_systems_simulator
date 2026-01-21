@@ -3,7 +3,8 @@ using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
-using UnityEngine.UI;
+using UnityEngine.UIElements;
+using Button = UnityEngine.UI.Button;
 
 namespace InteractableObjects
 {
@@ -51,7 +52,21 @@ namespace InteractableObjects
 
         private void TryApplyFrequency()
         {
-            if(InputField.text == _targetFrequency.ToString())
+            string text = InputField.text;
+
+            for (int i = 0; i<text.Length; i++)
+            {
+                if (text[i] == ',')
+                {
+                    text = text.Replace(',', '.');
+                }
+                else if (text[i] == '.')
+                {
+                    text = text.Replace('.', ',');
+                }
+            }
+            
+            if(InputField.text == _targetFrequency.ToString() || text == _targetFrequency.ToString())
                 OnFrequencySetted?.Invoke();
             else
                 ShowErrorMessage();
@@ -110,7 +125,7 @@ namespace InteractableObjects
                 return;
             }
             
-            _uiEventsService.GameLoopScreen.gameObject.SetActive(false);
+            _uiEventsService.GameLoopScreen.rootVisualElement.style.display = DisplayStyle.None;
         }
         
     }

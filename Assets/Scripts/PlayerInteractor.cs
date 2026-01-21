@@ -4,7 +4,7 @@ using UnityEngine.Events;
 public class PlayerInteractor : MonoBehaviour
 {
     public event UnityAction<string, Vector3> OnInteract;
-    public event UnityAction<CameraFocusableObject> OnFocus;
+    public event UnityAction<InteractableObject> OnFocus;
     public event UnityAction OnInteractEnd;
 
     private InteractableObject _interactableObject;
@@ -32,7 +32,7 @@ public class PlayerInteractor : MonoBehaviour
                 if (_interactableObject.FocusableObject != null && _interactableObject.FocusableObject.enabled)
                 {
                     _interactableObject.FocusableObject.InitializeInteractor(this);
-                    OnFocus?.Invoke(_interactableObject.FocusableObject);
+                    OnFocus?.Invoke(_interactableObject);
                     Debug.Log("Focused");
                 }
             }

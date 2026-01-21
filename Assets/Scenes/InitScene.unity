@@ -368,8 +368,64 @@ MonoBehaviour:
   _diagramViewScreen: {fileID: 356917373}
   _MainMenuScreen: {fileID: 377574613}
   _gameLoopScreen: {fileID: 1866705559}
-  _playerController: {fileID: 0}
+  _guideScreen: {fileID: 686465653}
+  _ApplicationScopeTemplate: {fileID: 9197481963319205126, guid: 5d12fab336fc9aa4a8b155d5778dd508, type: 3}
   _pointer: {fileID: 1866705560}
+--- !u!1 &686465651
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 686465652}
+  - component: {fileID: 686465653}
+  m_Layer: 0
+  m_Name: GuideScreen
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &686465652
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 686465651}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1035647802}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &686465653
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 686465651}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 19102, guid: 0000000000000000e000000000000000, type: 0}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.dll::UnityEngine.UIElements.UIDocument
+  m_PanelSettings: {fileID: 11400000, guid: 2cb0236c91e7d704da63e1d688cdc8ad, type: 2}
+  m_ParentUI: {fileID: 0}
+  sourceAsset: {fileID: 9197481963319205126, guid: 8bffc73173a929042a91a891e0e3880a, type: 3}
+  m_SortingOrder: 1
+  m_Position: 0
+  m_WorldSpaceSizeMode: 1
+  m_WorldSpaceWidth: 1920
+  m_WorldSpaceHeight: 1080
+  m_PivotReferenceSize: 0
+  m_Pivot: 0
+  m_WorldSpaceCollider: {fileID: 0}
 --- !u!1 &818177365
 GameObject:
   m_ObjectHideFlags: 0
@@ -523,6 +579,7 @@ Transform:
   - {fileID: 356917372}
   - {fileID: 377574612}
   - {fileID: 1866705558}
+  - {fileID: 686465652}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1866705557
@@ -588,7 +645,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1866705557}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 180366140b47c0d4389325e44ee86b9e, type: 3}
   m_Name: 
@@ -596,6 +653,9 @@ MonoBehaviour:
   targetObject: {fileID: 0}
   pointerName: Cursor
   edgeOffset: 50
+  _scalingSpeed: 0.3
+  _minScale: 0.8
+  _maxScale: 1.1
 --- !u!1 &1874546152
 GameObject:
   m_ObjectHideFlags: 0

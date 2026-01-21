@@ -10,15 +10,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 3d4be81ad72d59741a647b6bc5477af5, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 1.8068084
+      value: 0.040869445
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 3d4be81ad72d59741a647b6bc5477af5, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.7087674
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 3d4be81ad72d59741a647b6bc5477af5, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.04091108
+      value: 0.6367605
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 3d4be81ad72d59741a647b6bc5477af5, type: 3}
       propertyPath: m_LocalRotation.w
@@ -51,7 +51,7 @@ PrefabInstance:
     - target: {fileID: -7511558181221131132, guid: 3d4be81ad72d59741a647b6bc5477af5, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: a1d23941be595c74a91f4506b0170cdf, type: 2}
+      objectReference: {fileID: 2100000, guid: 599ecef0c0758cb429003472b4ecf322, type: 2}
     - target: {fileID: 919132149155446097, guid: 3d4be81ad72d59741a647b6bc5477af5, type: 3}
       propertyPath: m_Name
       value: GROB

@@ -41,7 +41,7 @@ public class GeneratorEnablingStage : IProgressStage
         _uiEventsService.Pointer.enabled = true;
         _uiEventsService.Pointer.SetTargetObject(_generator.transform);
         _hint.text = _stageObjectsData.Hint;
-        _hintAnimationCoroutine = _uiEventsService.StartCoroutine(UIElementsAnimationService.ShuffleTextCoroutine(_hint, _stageObjectsData.Hint, 750f));
+        _hintAnimationCoroutine = _uiEventsService.StartCoroutine(UIElementsAnimationService.ShuffleTextCoroutine(_hint, _stageObjectsData.Hint, Constants.HintAnimationSpeed));
         // _hintAnimationCoroutine = _uiEventsService.StartCoroutine(UIElementsAnimationService.PingPongScale(_hintPlace, 1.15f, 0.3f, 3));
     }
 
@@ -56,7 +56,7 @@ public class GeneratorEnablingStage : IProgressStage
 
     public void EndStage()
     {
-        if(_hintAnimationCoroutine != null)
+        if(_hintAnimationCoroutine != null && _uiEventsService != null)
             _uiEventsService.StopCoroutine(_hintAnimationCoroutine);
         
         _uiEventsService.Pointer.enabled = false;

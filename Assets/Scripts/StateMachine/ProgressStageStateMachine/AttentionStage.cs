@@ -8,7 +8,7 @@ public class AttentionStage : IProgressStage
     private UIEventsService _uiEventsService;
     private GameBootstrapper _gameBootstrapper;
     private StageObjectsData _stageObjectsData;
-    
+
     private Label _hint;
     private VisualElement _cursor;
     private VisualElement _root;
@@ -27,17 +27,21 @@ public class AttentionStage : IProgressStage
     public void StartStage()
     {
         Subscribe();
-        
-       GameObject blocker =  GameFactory.CreateObject(Constants.AttentionBlockerPath, Constants.AttentionBlockerPosition, Quaternion.Euler(Constants.AttentionBlockerRotation));
-       _attentionBlockerController = blocker.GetComponent<AttentionBlockerController>();
-       _attentionBlockerController.OnAccepted += EndStage;
-       
-       _stageObjectsData = _gameBootstrapper.ProgressStageStateMachine.GetDataByName(Constants.AttentionStageDataFileID);
-       
-       _hint.text = _stageObjectsData.Hint;
-       _hintAnimationCoroutine = _uiEventsService.StartCoroutine(UIElementsAnimationService.ShuffleTextCoroutine(_hint, _stageObjectsData.Hint, 750f));
-       _uiEventsService.Pointer.SetTargetObject(blocker.transform);
-       _uiEventsService.Pointer.enabled = true;
+
+        GameObject blocker = GameFactory.CreateObject(Constants.AttentionBlockerPath,
+            Constants.AttentionBlockerPosition, Quaternion.Euler(Constants.AttentionBlockerRotation));
+        _attentionBlockerController = blocker.GetComponent<AttentionBlockerController>();
+        _attentionBlockerController.OnAccepted += EndStage;
+
+        _stageObjectsData =
+            _gameBootstrapper.ProgressStageStateMachine.GetDataByName(Constants.AttentionStageDataFileID);
+
+        _hint.text = _stageObjectsData.Hint;
+        _hintAnimationCoroutine =
+            _uiEventsService.StartCoroutine(
+                UIElementsAnimationService.ShuffleTextCoroutine(_hint, _stageObjectsData.Hint, Constants.HintAnimationSpeed));
+        _uiEventsService.Pointer.SetTargetObject(blocker.transform);
+        _uiEventsService.Pointer.enabled = true;
     }
 
     private void Subscribe()
@@ -51,10 +55,12 @@ public class AttentionStage : IProgressStage
 
     public void EndStage()
     {
-        if(_hintAnimationCoroutine != null)
+        if (_hintAnimationCoroutine != null && _uiEventsService != null)
             _uiEventsService.StopCoroutine(_hintAnimationCoroutine);
+
+        if (_uiEventsService.Pointer != null)
+            _uiEventsService.Pointer.enabled = false;
         
-        _uiEventsService.Pointer.enabled = false;
         OnStageFinished?.Invoke();
         _attentionBlockerController.OnAccepted -= EndStage;
     }

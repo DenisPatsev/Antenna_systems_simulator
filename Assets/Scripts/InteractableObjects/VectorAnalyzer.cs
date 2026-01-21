@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.UIElements;
 
 namespace InteractableObjects
 {
@@ -34,7 +35,7 @@ namespace InteractableObjects
                 return;
             }
 
-            _uiEventsService.GameLoopScreen.gameObject.SetActive(false);
+            _uiEventsService.GameLoopScreen.rootVisualElement.style.display = DisplayStyle.None;
         }
 
         private void Activate()

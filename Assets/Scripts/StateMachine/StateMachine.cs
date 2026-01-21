@@ -14,6 +14,7 @@ public class StateMachine
             [typeof(InitialState)] = new InitialState(gameBootstrapper, this),
             [typeof(DiagramViewState)] = new DiagramViewState(gameBootstrapper, this),
             [typeof(MainMenuState)] = new MainMenuState(gameBootstrapper, this),
+            [typeof(GuideState)] = new GuideState(gameBootstrapper, gameBootstrapper.UIEventsService, this),
         };
     }
 

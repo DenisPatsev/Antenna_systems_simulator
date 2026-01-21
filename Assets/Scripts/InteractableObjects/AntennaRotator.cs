@@ -24,8 +24,6 @@ public class AntennaRotator : MonoBehaviour, IStageObject
     {
         _rightTurnButton.OnInteract += OnRightButtonClick;
         _leftTurnButton.OnInteract += OnLeftButtonClick;
-        
-        LoadRotation();
     }
 
     private void OnDisable()
@@ -41,15 +39,15 @@ public class AntennaRotator : MonoBehaviour, IStageObject
 
     private void OnLeftButtonClick()
     {
+        if (_currentRotationZ == 0)
+            return;
+        
         RotateAntenna(-1);
     }
 
     private void RotateAntenna(int direction)
     {
         _currentRotationZ += _rotationstep * direction;
-        
-        if(_currentRotationZ < 0)
-            _currentRotationZ = 360 - _currentRotationZ;
         
         if(_currentRotationZ == 360)
             OnAllAnglesMeasured?.Invoke();

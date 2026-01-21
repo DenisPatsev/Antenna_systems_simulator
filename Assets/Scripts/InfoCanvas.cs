@@ -19,7 +19,7 @@ public class InfoCanvas : MonoBehaviour
     {
         gameObject.SetActive(true);
         _objectInfoText.text = info;
-        _hintText.text = "Press E for interact";
+        _hintText.text = "Нажмите 'E' для взаимодействия";
 
         transform.position = position;
     }

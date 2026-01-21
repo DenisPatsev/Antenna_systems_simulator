@@ -22,24 +22,11 @@ public class TextShuffleEffect : MonoBehaviour
         _currentIndex = 0;
         _symbols = new char[]
         {
-            'A', 'B', 'C', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'R', 'S', 'T', 'U', 'V', 'W',
-            'X', 'Y', 'Z', '#', '@', '!', '%', '^', '&', '*', '(', ')', '-', '_', '+', '=', '/'
+            'A', 'B', 'C', 'E', 'F', 'G', 'I', 'K', 'M', 'N', 'O', 'R', 'S', 'T', 'U', 'V', 'W',
+            'X', 'Y', 'Z', '#', '@', '!', '%', '^', '&', '*', '(', ')', '-', '+', '=', '/'
         };
 
         ShuffleText(_textItems[_currentIndex].text, _shuffleSpeed);
-    }
-
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.R))
-        {
-            _currentIndex ++;
-            
-            if(_currentIndex >= _textItems.Length)
-                _currentIndex = 0;
-            
-            ShuffleText(_textItems[_currentIndex].text, _shuffleSpeed);
-        }
     }
 
     public void ShuffleText(string text, float shuffleSpeed)
@@ -55,20 +42,24 @@ public class TextShuffleEffect : MonoBehaviour
         float timer = 0f;
         char[] tempArray = new char[text.Length];
         label.text = "";
+        WaitForSeconds wait = new WaitForSeconds(1/shuffleSpeed);
+        int randomLenght = Random.Range(0, 4);
 
         for (int i = 0; i < text.Length; i++)
         {
-            tempArray[i] = _symbols[Random.Range(0, _symbols.Length)];
-
-            for (int j = 0; j < _symbols.Length; j++)
-            {
-                tempArray[i] = _symbols[Random.Range(0, _symbols.Length)];
-                _text.text = tempArray.ArrayToString();
-                yield return new WaitForSeconds(1/shuffleSpeed);
-            }
-
-            tempArray[i] = text[i];
-            label.text = tempArray.ArrayToString();
+            // tempArray[i] = _symbols[20];
+            //
+            // for (int j = 0; j < randomLenght; j++)
+            // {
+            //     tempArray[i] = _symbols[Random.Range(0, _symbols.Length)];
+            //     _text.text = tempArray.ArrayToString();
+            //     yield return wait;
+            // }
+            //
+            // tempArray[i] = text[i];
+            // label.text = tempArray.ArrayToString();
+            label.text += text[i];
+            yield return wait;
         }
     }
 }

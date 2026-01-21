@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 using UnityEngine.UIElements;
 
 public class MainMenuState : IState
@@ -22,6 +23,7 @@ public class MainMenuState : IState
     private Toggle _aoButton;
     private Toggle _depthButton;
     private Label _antennaNameLabel;
+    private Slider _mouseSenseSlider;
 
     private int _currentAntennaIndex;
 
@@ -62,12 +64,20 @@ public class MainMenuState : IState
 
     private void OnSettingsExitButtonClicked()
     {
+        SetMouseSensitivity();
+        
         _settingsScreen.style.display = DisplayStyle.None;
         _mainMenuScreen.style.display = DisplayStyle.Flex;
     }
 
     private void OnDictionaryButtonClicked()
     {
+        _gameBootstrapper.SceneLoader.LoadScene("GuideScene", OnGuideSceneLoaded);
+    }
+
+    private void OnGuideSceneLoaded()
+    {
+        _stateMachine.Enter<GuideState>();
     }
 
     private void OnBloomButtonClicked(ChangeEvent<bool> evt)
@@ -86,8 +96,14 @@ public class MainMenuState : IState
         Constants.IsDepthOfFieldOn = _depthButton.value;
     }
 
+    private void SetMouseSensitivity()
+    {
+        Constants.MouseSensitivity = _mouseSenseSlider.value;
+    }
+
     private void OnExitButtonClicked()
     {
+        Application.Quit();
     }
 
     private void OnLeftSwitchButtonClicked()
@@ -116,6 +132,9 @@ public class MainMenuState : IState
 
     private void OnApplyButtonClicked()
     {
+        if (_gameBootstrapper.AntennaDatas[_currentAntennaIndex].diagram2DDatafile == null)
+            return;
+
         _gameBootstrapper.SetCurrentAntennaData(_gameBootstrapper.AntennaDatas[_currentAntennaIndex].antennaName);
         _gameBootstrapper.SceneLoader.LoadScene(Constants.MainSceneName, OnLoaded);
         Debug.Log(_gameBootstrapper.SelectedAntenna);
@@ -150,6 +169,9 @@ public class MainMenuState : IState
         _aoButton = _root.Q<VisualElement>("AOEffectContainer").Q<Toggle>("EnableButton");
         _depthButton = _root.Q<VisualElement>("DepthEffectContainer").Q<Toggle>("EnableButton");
         _settingsExitButton = _settingsScreen.Q<Button>("ExitButton");
+        _mouseSenseSlider = _root.Q<Slider>("MouseSenseSlider");
+        
+        _mouseSenseSlider.value = Constants.MouseSensitivity;
 
         _measurementModeButton.clicked += OnMeasurementModeButtonClicked;
         _settingsButton.clicked += OnSettingsButtonClicked;

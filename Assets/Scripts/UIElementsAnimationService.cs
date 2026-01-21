@@ -124,12 +124,13 @@ public static class UIElementsAnimationService
         label.text = "";
         char[] symbols = Constants.ShufflerSymbols;
         WaitForSeconds wait = new WaitForSeconds(1/shuffleSpeed);
+        int randomLength = Random.Range(3, 8);
 
         for (int i = 0; i < text.Length; i++)
         {
             tempArray[i] = symbols[Random.Range(0, symbols.Length)];
 
-            for (int j = 0; j < symbols.Length; j++)
+            for (int j = 0; j < randomLength; j++)
             {
                 tempArray[i] = symbols[Random.Range(0, symbols.Length)];
                 label.text = tempArray.ArrayToString();

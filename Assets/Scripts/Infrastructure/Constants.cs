@@ -7,6 +7,7 @@ public static class Constants
     public const string MainMenuSceneName = "MenuScene";
     public const string InitialSceneName = "InitScene";
     public const KeyCode InteractionKeyCode = KeyCode.E;
+    public const KeyCode GuideKeyCode = KeyCode.LeftAlt;
     
     public const string PlayerPrefabPath = "Prefabs/Player";
     public const string InfoCanvasPrefabPath = "Prefabs/InfoCanvas";
@@ -20,6 +21,7 @@ public static class Constants
     public const string MeasurableAntennaPath = "Prefabs/MeasurableAntenna";
     public const string AntennaRotatorPath = "Prefabs/AntennaRotationCanvas";
     public const string PostProcessingPrefabPath = "Prefabs/Post-process Volume";
+    public const string GuideCameraPath = "Prefabs/GuideCamera";
 
     public const string FraungoferMeasurementStageDataFileID = "FraungoferMeasurementStage";
     public const string AttentionStageDataFileID = "AttentionStage";
@@ -35,6 +37,9 @@ public static class Constants
     public const float ComputerRotationX = -90.502f;
     public const float ComputerRotationY = -83.082f;
     public const float ComputerRotationZ = -10.41699f;
+    
+    public static float MouseSensitivity = 1f;
+    public const float HintAnimationSpeed = 400f;
     
     public static bool IsBloomOn = true;
     public static bool IsAOOn = true;

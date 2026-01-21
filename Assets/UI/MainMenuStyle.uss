@@ -65,3 +65,28 @@
     border-color: transparent;
     margin-left: 64px;
 }
+
+.unity-base-slider--horizontal .unity-base-slider__dragger{
+    height: 30px;
+    visibility: hidden;
+}
+
+.unity-base-slider--horizontal .unity-base-slider__tracker{
+    height: 60px;
+    align-self: center;
+    align-items: center;
+    top: -30px;
+    border-radius: 30px;
+    overflow: hidden;
+    background-color: transparent;
+    border-color: rgb(41, 203, 254);
+}
+
+.unity-base-slider__drag-container{
+    align-items: center;
+    align-self: center;
+}
+
+.unity-base-slider__fill{
+    background-color: rgb(41, 203, 254);
+}

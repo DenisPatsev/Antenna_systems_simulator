@@ -15,6 +15,7 @@ public abstract class InteractableObject : MonoBehaviour, IInteractableObject
     public Vector3 InfoInterfacePosition => _infoInterfacePosition;
     public string Name => _name;
     public CameraFocusableObject FocusableObject => _focusableObject;
+    public UIEventsService UIEventsService => _uiEventsService;
 
     protected void OnEnable()
     {

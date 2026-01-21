@@ -1,0 +1,6 @@
+<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <ui:VisualElement name="ScopeTemplate" style="flex-grow: 0; flex-shrink: 0; width: 95%; margin-bottom: 20px; flex-direction: row; justify-content: flex-start; padding-left: 5px;">
+        <ui:VisualElement name="Dot" style="flex-grow: 0; flex-shrink: 0; align-items: center; justify-content: center; align-self: center; background-color: rgb(255, 221, 124); width: 20px; height: 20px; border-top-left-radius: 30px; border-top-right-radius: 30px; border-bottom-right-radius: 30px; border-bottom-left-radius: 30px; margin-right: 15px;" />
+        <ui:Label text="Label" name="Application" style="margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0; -unity-font-definition: url(&quot;project://database/Assets/UI/Fonts/vivl-rail%20SDF.asset?fileID=11400000&amp;guid=969db0c3cb946ab4c812f9ab0cf2bec1&amp;type=2#vivl-rail SDF&quot;); font-size: 35px; white-space: normal; color: rgb(255, 188, 0); text-shadow: 0 0 20px rgb(255, 188, 0); max-width: none; flex-grow: 1; -unity-text-align: middle-left;" />
+    </ui:VisualElement>
+</ui:UXML>

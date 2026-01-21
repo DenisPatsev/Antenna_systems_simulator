@@ -43,6 +43,11 @@ public class PlayerController : MonoBehaviour
         _player.transform.rotation = Quaternion.Euler(0, _xRotation, 0);
         _camera.transform.localRotation = Quaternion.Euler(_yRotation, 0, 0);
     }
+
+    public void SetRotationSpeedMultiplier(float speedMultiplier)
+    {
+        _rotaionSpeed *= speedMultiplier;
+    }
     
     private void LoadTransform()
     {

@@ -885,6 +885,17 @@ namespace ClassDiagramGenerator
             {
                 var sb = new StringBuilder();
                 sb.AppendLine("@startuml");
+                
+                // // ✅ ДОБАВИТЬ ЭТО для увеличения шрифта:
+                // sb.AppendLine("skinparam classFontSize 20");    // Размер шрифта названия класса
+                // sb.AppendLine("skinparam classFontStyle bold"); // Жирный шрифт
+                // sb.AppendLine("skinparam classFontColor #000000"); // Цвет шрифта (черный)
+                //
+                // // Можно также настроить другие элементы:
+                // sb.AppendLine("skinparam classAttributeFontSize 14"); // Шрифт полей/методов
+                // sb.AppendLine("skinparam classBackgroundColor #F9F9F9"); // Фон класса
+                // sb.AppendLine("skinparam classBorderColor #000000"); // Цвет рамки
+                
                 foreach (var c in classes)
                 {
                     string stereotype = c.IsInterface ? " <<interface>>" : (c.IsAbstract ? " <<abstract>>" : "");

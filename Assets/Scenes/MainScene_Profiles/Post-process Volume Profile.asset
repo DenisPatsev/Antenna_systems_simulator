@@ -12,19 +12,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 556797029e73b2347956b6579e77e05b, type: 3}
   m_Name: DepthOfField
   m_EditorClassIdentifier: Unity.Postprocessing.Runtime::UnityEngine.Rendering.PostProcessing.DepthOfField
-  active: 0
+  active: 1
   enabled:
     overrideState: 1
-    value: 0
+    value: 1
   focusDistance:
     overrideState: 1
-    value: 1.57
+    value: 1.42
   aperture:
     overrideState: 1
-    value: 2.8
+    value: 23.5
   focalLength:
     overrideState: 1
-    value: 40
+    value: 62
   kernelSize:
     overrideState: 1
     value: 1
@@ -72,13 +72,13 @@ MonoBehaviour:
     value: 1
   intensity:
     overrideState: 1
-    value: 0.0001
+    value: 0.14
   threshold:
     overrideState: 1
-    value: 56
+    value: 1
   softKnee:
     overrideState: 1
-    value: 0.506
+    value: 0.95
   clamp:
     overrideState: 0
     value: 65466.8

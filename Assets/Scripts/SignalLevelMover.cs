@@ -40,7 +40,7 @@ public class SignalLevelMover : MonoBehaviour
 
     private void OnEnable()
     {
-        _maxPosY = 0.16f;
+        _maxPosY = 0.156f;
 
         _timer = 0;
         _minGHz = 1;

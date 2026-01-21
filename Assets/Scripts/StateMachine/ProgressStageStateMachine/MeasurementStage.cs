@@ -40,6 +40,7 @@ public class MeasurementStage : IProgressStage
     public void StartStage()
     {
         Subscribe();
+        _uiEventsService.FraungoferDistanceCanvas.gameObject.SetActive(false);
         _stageData = _progressStageStateMachine.GetDataByName(Constants.MeasurementStageID);
         _rotator = _stageData.GetStageObjectByType(typeof(AntennaRotator)) as AntennaRotator;
         _stageData = _progressStageStateMachine.GetDataByName(Constants.VectorAnalyzerStageDataID);
@@ -50,12 +51,13 @@ public class MeasurementStage : IProgressStage
         UpdateSignalInfo();
 
         _rotator.OnAllAnglesMeasured += EndStage;
-        _uiEventsService.Pointer.SetTargetObject(_rotator.gameObject.transform);
         
         _stageObjectsData = _bootstrapper.ProgressStageStateMachine.GetDataByName(Constants.MeasurementStageID);
-       
+
+        _uiEventsService.Pointer.enabled = true;
+        _uiEventsService.Pointer.SetTargetObject(_rotator.gameObject.transform);
         _hint.text = _stageObjectsData.Hint;
-        _hintAnimationCoroutine = _uiEventsService.StartCoroutine(UIElementsAnimationService.ShuffleTextCoroutine(_hint, _stageObjectsData.Hint, 750f));
+        _hintAnimationCoroutine = _uiEventsService.StartCoroutine(UIElementsAnimationService.ShuffleTextCoroutine(_hint, _stageObjectsData.Hint, Constants.HintAnimationSpeed));
       // _hintAnimationCoroutine = _uiEventsService.StartCoroutine(UIElementsAnimationService.PingPongScale(_hintPlace, 1.15f, 0.3f, 3));
     }
     
@@ -70,8 +72,15 @@ public class MeasurementStage : IProgressStage
 
     public void EndStage()
     {
-        if(_hintAnimationCoroutine != null)
+        if(_hintAnimationCoroutine != null && _uiEventsService.GameLoopScreen.gameObject.activeInHierarchy && _uiEventsService.GameLoopScreen != null)
             _uiEventsService.StopCoroutine(_hintAnimationCoroutine);
+        
+        _rotator.gameObject.SetActive(false);
+        
+        if(_uiEventsService.Pointer != null)
+            _uiEventsService.Pointer.enabled = false;
+        
+        _cursor.style.display = DisplayStyle.None;
         
         _rotator.OnInfoUpdated -= UpdateSignalInfo;
         _rotator.OnAllAnglesMeasured -= EndStage;

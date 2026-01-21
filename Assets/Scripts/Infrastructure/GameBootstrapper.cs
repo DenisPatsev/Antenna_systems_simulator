@@ -25,7 +25,16 @@ public class GameBootstrapper : MonoBehaviour, ICoroutineRunner
         _sceneLoader = new SceneLoader(this);
         _stateMachine = new StateMachine(this);
 
+        _uiEventsService.OnGameExit += ExitGame;
+
         _stateMachine.Enter<InitialState>();
+
+        Application.targetFrameRate = 120;
+    }
+
+    private void OnDisable()
+    {
+        _uiEventsService.OnGameExit -= ExitGame;
     }
 
     public void SetCurrentAntennaData(string antennaName)
@@ -36,7 +45,7 @@ public class GameBootstrapper : MonoBehaviour, ICoroutineRunner
                 _selectedAntenna = data;
         }
 
-        if (_selectedAntenna != null)
+        if (_selectedAntenna != null && _selectedAntenna.signalLevelValues.Count == 0)
         {
             _selectedAntenna.signalLevelValues = DataParserStatic.GetDataFromFile(_selectedAntenna.diagram2DDatafile);
             Debug.Log("AntennaData successfully parsed. First value - " + _selectedAntenna.signalLevelValues[0]);
@@ -60,11 +69,18 @@ public class GameBootstrapper : MonoBehaviour, ICoroutineRunner
                 data.stageObjects.Add(stageObject);
         }
     }
-
+    
     private IEnumerator DelayedObjectsEnabler(float delay, ProgressStageStateMachine progressStage)
     {
         yield return new WaitForSeconds(delay);
         
         progressStage.enabled = true;
+    }
+
+    private void ExitGame()
+    {
+        _progressStageStateMachine.enabled = false;
+        _uiEventsService.ResetUIDocumentsState();
+        _stateMachine.Enter<InitialState>();
     }
 }

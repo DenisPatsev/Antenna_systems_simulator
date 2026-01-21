@@ -48,7 +48,7 @@ public class DiagramBuilder : MonoBehaviour
     }
 
     [Header("File Settings")]
-    public string fileName = "ff1.txt";
+    public TextAsset dataFile; // Изменено с string fileName на TextAsset
     public float scale = 0.1f;
     
     [Header("Visualization Settings")]
@@ -79,49 +79,46 @@ public class DiagramBuilder : MonoBehaviour
     private List<MeshRenderer> _labels;
     
     public List<MeshRenderer> Labels => _labels;
+    
+    // private void Update()
+    // {
+    //     if (Input.GetKeyDown(KeyCode.RightArrow))
+    //     {
+    //         selectedPhiAngle += 5;
+    //         GenerateMeshFromCurrentSelection();
+    //     }
+    // }
 
-    void Start()
-    {
-        _labels = new List<MeshRenderer>();
-        
-        if (autoGenerateOnStart)
-        {
-            LoadDataAndGenerateMesh();
-        }
-    }
+    // void OnValidate()
+    // {
+    //     if (Application.isPlaying && isDataLoaded)
+    //     {
+    //         GenerateMeshFromCurrentSelection();
+    //     }
+    // }
 
-    private void Update()
+    public void InitializeData(TextAsset file, float diagramScale)
     {
-        if (Input.GetKeyDown(KeyCode.RightArrow))
-        {
-            selectedPhiAngle += 5;
-            GenerateMeshFromCurrentSelection();
-        }
-    }
-
-    void OnValidate()
-    {
-        if (Application.isPlaying && isDataLoaded)
-        {
-            GenerateMeshFromCurrentSelection();
-        }
+        dataFile = file;
+        scale = diagramScale;
+        LoadDataAndGenerateMesh();
     }
 
     [ContextMenu("Load Data and Generate Mesh")]
     public void LoadDataAndGenerateMesh()
     {
+        _labels = new List<MeshRenderer>();
         InitializeComponents();
         
-        string filePath = Path.Combine(Application.dataPath, fileName);
-        if (!File.Exists(filePath))
+        if (dataFile == null)
         {
-            Debug.LogError($"File not found: {filePath}");
+            Debug.LogError("Data file is not assigned. Please assign a TextAsset to the dataFile field.");
             return;
         }
 
         try
         {
-            ParseFarfieldFile(filePath);
+            ParseFarfieldData(dataFile.text);
             GenerateMeshFromCurrentSelection();
             
             if (showAxes)
@@ -129,11 +126,11 @@ public class DiagramBuilder : MonoBehaviour
                 CreateAxes();
             }
             
-            Debug.Log($"Mesh generated successfully");
+            Debug.Log($"Mesh generated successfully from file: {dataFile.name}");
         }
         catch (System.Exception e)
         {
-            // Debug.LogError($"Error generating mesh: {e.Message}");
+            Debug.LogError($"Error generating mesh: {e.Message}");
         }
     }
 
@@ -210,12 +207,12 @@ public class DiagramBuilder : MonoBehaviour
         meshFilter.mesh = mesh;
     }
 
-    private void ParseFarfieldFile(string filePath)
+    private void ParseFarfieldData(string fileContent)
     {
         parsedPoints = new List<FarfieldPoint>();
         phiAngleData = new Dictionary<float, List<FarfieldPoint>>();
         
-        string[] lines = File.ReadAllLines(filePath);
+        string[] lines = fileContent.Split('\n');
 
         bool foundDataHeader = false;
         for (int i = 0; i < lines.Length; i++)
@@ -253,19 +250,21 @@ public class DiagramBuilder : MonoBehaviour
                     }
                     catch (System.Exception e)
                     {
-                        // Debug.LogWarning($"Failed to parse line {i}: {line}");
+                        Debug.LogWarning($"Failed to parse line {i}: {line}. Error: {e.Message}");
                     }
                 }
             }
         }
 
         isDataLoaded = true;
+        Debug.Log($"Parsed {parsedPoints.Count} points from {phiAngleData.Count} different phi angles");
     }
 
     private void CreateMeshFromAllAngles()
     {
         if (parsedPoints == null || parsedPoints.Count == 0)
         {
+            Debug.LogError("No parsed points available to create mesh");
             return;
         }
 
@@ -287,7 +286,6 @@ public class DiagramBuilder : MonoBehaviour
 
         List<float> sortedPhis = new List<float>(phiGroups.Keys);
         sortedPhis.Sort();
-
 
         foreach (float phi in sortedPhis)
         {
@@ -320,8 +318,6 @@ public class DiagramBuilder : MonoBehaviour
             Debug.LogWarning("Not enough theta values to create triangles");
             return;
         }
-
-        Debug.Log($"Creating triangles for grid: {phiCount} x {thetaCount}");
 
         for (int phiIndex = 0; phiIndex < phiCount - 1; phiIndex++)
         {
@@ -465,7 +461,6 @@ public class DiagramBuilder : MonoBehaviour
         if (meshRenderer != null)
         {
             meshRenderer.material = textMesh.font.material;
-            
             _labels.Add(meshRenderer);
         }
     }
